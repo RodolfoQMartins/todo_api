@@ -11,6 +11,15 @@
              (let [active (get-in req [:body :active])
                    name (get-in req [:body :name])]
                    (todo/create name active)))
+           (PUT "/todos/:id" req
+             (let [id (read-string (get-in req [:params :id]))
+                   name (get-in req [:body :name])
+                   active (get-in req [:body :active])]
+                  (todo/update-by-id id name active)
+                  (todo/find-by-id id)))
+           (DELETE "/todos/:id" [id]
+             (todo/delete-by-id id)
+             (str "Deleted todo: " id))
            (route/not-found "Not Found"))
 
 

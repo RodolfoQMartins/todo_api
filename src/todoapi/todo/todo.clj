@@ -17,9 +17,10 @@
   (insert todo
           (values {:name name :active active})))
 
-(defn update-by-id [id name]
+(defn update-by-id [id name active]
   (update todo
-          (set-fields {:name name })
+          (set-fields {:name name})
+          (set-fields {:active active})
           (where {:id id})))
 
 (defn delete-by-id [id]
